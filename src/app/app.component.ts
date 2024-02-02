@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { NavBarComponent } from './core/nav-bar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [RouterOutlet, NavBarComponent],
   template: `
-    <h1>Welcome to {{title}}!</h1>
+    <app-nav-bar />
 
     <router-outlet></router-outlet>
   `,
