@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { debounceTime } from 'rxjs';
 import { CartActions } from '../core/store/cart/cart.actions';
 import { FiltersActions } from '../core/store/products/filters.actions';
-import { selectFilteredList } from '../core/store/products/filters.feature';
+import { selectFilteredList, selectFilteredProducts } from '../core/store/products/filters.feature';
 import { ProductsActions } from '../core/store/products/products.actions';
 import { Product } from '../model/product';
 
@@ -18,7 +18,7 @@ import { Product } from '../model/product';
       
     <!--NEW-->
     <input type="text" [formControl]="input" placeholder="Search" >
-      
+   
     @for (product of products(); track product.id) {
       <li> 
           {{product.name}} - € {{product.cost}}
@@ -30,10 +30,10 @@ import { Product } from '../model/product';
 })
 export default class ShopComponent implements OnInit {
   readonly store = inject(Store)
-  // UPDATE
   readonly products = this.store.selectSignal(selectFilteredList)
+  // NEW: or you can use the extraSelector instead of products
+  readonly filteredProducts = this.store.selectSignal(selectFilteredProducts)
 
-  // NEW
   input = new FormControl('', { nonNullable: true })
 
   ngOnInit() {

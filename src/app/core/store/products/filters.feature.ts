@@ -17,12 +17,22 @@ export const filtersFeature = createFeature({
     initialState,
     on(FiltersActions.search, (state, action) => ({ ...state, text: action.text})),
   ),
+  // NEW
+  extraSelectors: ({ selectText }) => ({
+    selectFilteredProducts:  createSelector(
+      selectList,
+      selectText,
+      (list, text) => list.filter(item => item.name.toLowerCase().includes(text.toLowerCase()))
+    )
+  })
 });
 
 export const {
   name, // feature name
   reducer, // feature reducer
   selectText, // selector for `text` property
+  // NEW
+  selectFilteredProducts
 } = filtersFeature;
 
 

@@ -10,7 +10,6 @@ export interface CounterState {
 
 export const initialState: CounterState = {
   value: 0,
-  // NEW
   multiplier: 10,
 };
 export const counterFeature = createFeature({
@@ -20,22 +19,27 @@ export const counterFeature = createFeature({
     on(CounterActions.increment, (state, action) => ({ ...state, value: state.value + 1})),
     on(CounterActions.decrement, (state, action) => ({ ...state, value: state.value - action.value})),
     on(CounterActions.reset, (state, action) => ({ ...state, value: 0})),
-
   ),
+  // NEW
+  extraSelectors:  ({selectValue, selectMultiplier, selectCounterState}) => ({
+    selectTriple: createSelector(
+      selectValue,
+      (value) => value * 3
+    )
+  }),
 });
 
 export const {
   name, // feature name
   reducer, // feature reducer
   selectValue, // selector for `books` property
-  // NEW
   selectMultiplier,
-  selectCounterState
+  selectCounterState,
+  // NEW
+  selectTriple
 } = counterFeature;
 
 
-
-// NEW
 export const selectMultipliedValue = createSelector(
   selectValue,
   selectMultiplier,
