@@ -23,13 +23,15 @@ const initialState: ProductShopState = {
 export const ShopProductStore = signalStore(
   withState(initialState),
   withComputed(({ products }) => ({
-    totalCost: computed(() => products().reduce((acc, item) => acc + item.cost, 0)),
+    totalCost: computed(() => products().reduce((acc, item) => {
+      return acc + (item.cost || 0)
+    }, 0)),
   })),
   withMethods((store, http = inject(HttpClient)) => ({
     updateQuery(query: string) {
       patchState(store, { query });
     },
-    loadMe: rxMethod<string>(
+    logQuery: rxMethod<string>(
       pipe(
         tap((query) => console.log('do something!', query)),
       ),
@@ -43,7 +45,7 @@ export const ShopProductStore = signalStore(
             .pipe(
               tapResponse({
                 next: (products) => patchState(store, { products }),
-                error: console.error,
+                error: (err) => console.error('-->', err),
                 finalize: () => patchState(store, { isLoading: false }),
               }),
             ),
@@ -52,8 +54,8 @@ export const ShopProductStore = signalStore(
     ),
   })),
   withHooks({
-    onInit({ loadMe, loadByQuery, query}) {
-      loadMe(query)
+    onInit({ logQuery, loadByQuery, query}) {
+      logQuery(query)
       loadByQuery(query);
     },
   }),

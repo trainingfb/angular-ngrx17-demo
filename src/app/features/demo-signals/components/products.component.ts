@@ -21,6 +21,8 @@ import { ShopProductStore } from '../store/shop-products.store';
     @for (product of store.products(); track product.id ) {
         <li>{{product.name}}</li>
     }
+    query: {{store.query()}}
+    total: {{store.totalCost()}}
     <pre>{{store.products() | json}}</pre>
   `,
   providers: [ShopProductStore]
