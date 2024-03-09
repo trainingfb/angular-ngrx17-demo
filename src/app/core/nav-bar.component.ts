@@ -10,17 +10,19 @@ import { selectTotalProductsInCart } from './store/cart/cart.feature';
     RouterLink
   ],
   template: `
+    <div class="flex gap-3 bg-slate-900 p-3 items-center">
       <button routerLink="home">home</button>
       <button routerLink="shop">shop</button>
       <button routerLink="cart">cart</button>
       <button routerLink="demo-counter">counter</button>
       <button routerLink="demo-ngrx-signals">demo ngrx signals</button>
       
-      <span>
-        {{totalProductsInCart()}} products
+      <span class="badge badge-accent">
+        {{totalProductsInCart()}} products in Cart
       </span>
-      
-      <hr>
+
+    </div>
+
   `,
   styles: ``
 })

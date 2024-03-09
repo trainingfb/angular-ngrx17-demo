@@ -9,7 +9,9 @@ import { NavBarComponent } from './core/nav-bar.component';
   template: `
     <app-nav-bar />
 
-    <router-outlet></router-outlet>
+    <div class="mx-auto max-w-screen-xl my-4">
+      <router-outlet></router-outlet>
+    </div>
   `,
   styles: [],
 })
