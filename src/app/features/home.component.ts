@@ -2,11 +2,14 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RouterActions } from '../core/store/router/router.actions';
 import { selectUrl } from '../core/store/router/router.selectors';
+import { SidePanelComponent } from '../shared/side-panel.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [
+    SidePanelComponent
+  ],
   template: `
     <p>
       home works!{{url()}}

@@ -8,12 +8,13 @@ import { FiltersActions } from '../core/store/products/filters.actions';
 import { selectFilteredList, selectFilteredProducts } from '../core/store/products/filters.feature';
 import { ProductsActions } from '../core/store/products/products.actions';
 import { Product } from '../model/product';
+import { SidePanelComponent } from '../shared/side-panel.component';
 
 @Component({
   selector: 'app-shop',
   standalone: true,
   // NEW
-  imports: [NgForOf, ReactiveFormsModule],
+  imports: [NgForOf, ReactiveFormsModule, SidePanelComponent],
   template: `
       
     <!--NEW-->
@@ -25,6 +26,9 @@ import { Product } from '../model/product';
           <button (click)="addProductToCart(product)">Add button</button>
       </li>
     }
+
+    <app-side-panel [(opened)]="isCartOpened"/>
+    
     
   `,
 })
@@ -35,6 +39,8 @@ export default class ShopComponent implements OnInit {
   readonly filteredProducts = this.store.selectSignal(selectFilteredProducts)
 
   input = new FormControl('', { nonNullable: true })
+
+  isCartOpened = true;
 
   ngOnInit() {
     this.store.dispatch(ProductsActions.load())
