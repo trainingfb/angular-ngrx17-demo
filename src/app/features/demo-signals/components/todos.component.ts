@@ -13,8 +13,9 @@ import { TodosStore } from '../store/todos.store';
     <input 
       type="text" #input 
       (keydown.enter)="store.add(input.value); input.value = ''"
+      placeholder="write new todo..."
     >
-    <hr>
+    
 
     @if(!store.empty()) {
       <div>Done: {{store.doneTotal()}}</div>  
@@ -22,10 +23,11 @@ import { TodosStore } from '../store/todos.store';
     }
       
     @for (todo  of store.todos(); track todo.id) {
-      <li>
+      <li class="flex items-center gap-3 my-4">
         <input 
           type="checkbox" [checked]="todo.done" 
           (change)="store.toggle(todo.id)"
+          class="checkbox"
         >
         <span [style.text-decoration]="todo.done ? 'line-through' : 'none'">
             {{todo.title}}

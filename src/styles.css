@@ -7,3 +7,7 @@
 button {
   @apply btn btn-primary
 }
+
+input[type="text"] {
+  @apply input input-bordered
+}

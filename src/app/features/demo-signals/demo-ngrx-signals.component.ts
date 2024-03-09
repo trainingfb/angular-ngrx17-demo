@@ -14,11 +14,11 @@ import { TodosStore } from './store/todos.store';
   ],
   template: `
   
-    <div style="display: flex; gap: 20px">
-        <div style="width: 50%">
+    <div class="flex gap-3">
+        <div class="w-1/2">
           <app-todos />
         </div>
-        <div style="width: 50%">
+        <div class="w-1/2">
           <app-products />
         </div>
     </div>
