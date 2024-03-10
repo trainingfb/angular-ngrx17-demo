@@ -1,26 +1,28 @@
-// core/store/counter/counter.feature.ts
+// app/features/demo-counter/store/counter/counter.feature.ts
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { CounterActions } from './counter.actions';
 
 export interface CounterState {
   value: number;
-  // NEW
   multiplier: number;
+  error: boolean
 }
 
 export const initialState: CounterState = {
   value: 0,
   multiplier: 10,
+  error: false
 };
 export const counterFeature = createFeature({
   name: 'counter',
   reducer: createReducer(
     initialState,
-    on(CounterActions.increment, (state, action) => ({ ...state, value: state.value + 1})),
-    on(CounterActions.decrement, (state, action) => ({ ...state, value: state.value - action.value})),
+    on(CounterActions.loadSuccess, (state, action) => ({ ...state, value: action.value, error: false})),
+    on(CounterActions.loadFailed, (state, action) => ({ ...state, error: true})),
+    on(CounterActions.incrementSuccess, (state, action) => ({ ...state, value: action.value})),
+    on(CounterActions.decrementSuccess, (state, action) => ({ ...state, value: action.value})),
     on(CounterActions.reset, (state, action) => ({ ...state, value: 0})),
   ),
-  // NEW
   extraSelectors:  ({selectValue, selectMultiplier, selectCounterState}) => ({
     selectTriple: createSelector(
       selectValue,
@@ -30,12 +32,12 @@ export const counterFeature = createFeature({
 });
 
 export const {
-  name, // feature name
-  reducer, // feature reducer
-  selectValue, // selector for `books` property
+  name,
+  reducer,
+  selectValue,
   selectMultiplier,
+  selectError, // NEW
   selectCounterState,
-  // NEW
   selectTriple
 } = counterFeature;
 

@@ -8,11 +8,13 @@ import { filtersFeature } from './core/store/products/filters.feature';
 import { productsFeature } from './core/store/products/products-feature';
 import * as productsEffects from './core/store/products/products.effects';
 import * as routerEffects from './core/store/router/router.effects';
+import * as counterEffects from './features/demo-counter/store/counter/counter.effects';
 import { routes } from './app.routes';
 import { provideState, provideStore } from '@ngrx/store';
-import { counterFeature } from './core/store/counter/counter.feature';
+import { counterFeature } from './features/demo-counter/store/counter/counter.feature';
 import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
+import { counterUIFeature } from './features/demo-counter/store/ui/counter-ui.feature';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,8 +27,9 @@ export const appConfig: ApplicationConfig = {
     provideState({ name: filtersFeature.name, reducer: filtersFeature.reducer }),
     // provideState({ name: 'counter', reducer: counterFeature.reducer}),
     provideState({ name: counterFeature.name, reducer: counterFeature.reducer }),
+    provideState({ name: counterUIFeature.name, reducer: counterUIFeature.reducer }),
     provideStoreDevtools({ maxAge: 10, trace: true, connectInZone: true }),
-    provideEffects([productsEffects, routerEffects]),
+    provideEffects([productsEffects, routerEffects, counterEffects]),
     // NEW
     provideRouterStore()
 ]

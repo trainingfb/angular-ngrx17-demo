@@ -27,7 +27,6 @@ import { SidePanelComponent } from '../shared/side-panel.component';
       </li>
     }
 
-    <app-side-panel [(opened)]="isCartOpened"/>
     
     
   `,
@@ -40,7 +39,6 @@ export default class ShopComponent implements OnInit {
 
   input = new FormControl('', { nonNullable: true })
 
-  isCartOpened = true;
 
   ngOnInit() {
     this.store.dispatch(ProductsActions.load())

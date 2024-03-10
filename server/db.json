@@ -24,6 +24,8 @@
       "name": "fwefewfew",
       "id": 5
     }
-  ]
+  ],
+  "counter": {
+    "value": -10
+  }
 }
-

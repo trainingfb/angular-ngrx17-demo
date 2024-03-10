@@ -5,7 +5,7 @@ export const routes: Routes = [
   { path: 'shop', loadComponent: () => import('./features/shop.component')},
   { path: 'cart', loadComponent: () => import('./features/cart.component')},
   {
-    path: 'demo-counter', loadComponent: () => import('./features/demo-counter.component'),
+    path: 'demo-counter', loadComponent: () => import('./features/demo-counter/demo-counter.component'),
   },
   {
     path: 'demo-ngrx-signals', loadComponent: () => import('./features/demo-signals/demo-ngrx-signals.component'),
