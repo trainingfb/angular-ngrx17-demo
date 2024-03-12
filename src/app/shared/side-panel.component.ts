@@ -9,14 +9,14 @@ import { booleanAttribute, Component, EventEmitter, Input, input, Output } from 
   ],
   template: `
     <div
-      class="absolute w-96 bg-slate-800 top-0 bottom-0  transition-all shadow-2xl p-3 duration-1000"
+      class="absolute w-96 bg-slate-800 text-white top-0 bottom-0  transition-all shadow-2xl p-3 duration-1000"
       style="z-index: 1000"
       [ngClass]="{
         'right-0': isOpen(),
         '-right-96': !isOpen()
      }"
     >
-      
+
       <div class="flex gap-3 items-center justify-between">
         <div class="font-bold">{{title()}}</div>
         <i class="fa fa-times cursor-pointer" (click)="close.emit()"></i>
